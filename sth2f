@@ -1,0 +1,149 @@
+#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
+using namespace std;
+class SmartArray
+{
+public:
+	int* tab;
+	int size;
+	SmartArray(int w);
+	void show();
+	void max();
+	void min();
+	void bubble_sort();
+	void bubble_mieszanie();
+	void pytanie();
+};
+SmartArray::SmartArray(int w)
+{
+	srand(time(NULL));
+	size = w;
+	tab = new int[w];
+	for (int i = 0; i < w; i++)
+		tab[i] = rand();
+}
+void SmartArray::show()
+{
+	cout << "Wielkosc tablicy: " << size << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << tab[i] << " ";
+	}
+
+}
+void SmartArray::max()
+{
+	int a = tab[0];
+	for (int i = 1; i < size; i++)
+	{
+		if (tab[i] > a)
+		{
+			a = tab[i];
+		}
+	}
+	cout << a;
+}
+void SmartArray::min()
+{
+	int a = tab[0];
+	for (int i = 1; i < size; i++)
+	{
+
+		if (tab[i] < a)
+			a = tab[i];
+
+	}
+	cout << a;
+}
+void SmartArray::bubble_sort()
+{
+	int i, j;
+	for (j = 0; j < size - 1; j++)
+		for (i = 0; i < size - 1; i++)
+			if (tab[i] > tab[i + 1]) swap(tab[i], tab[i + 1]);
+}
+void SmartArray::bubble_mieszanie()
+{
+	int i, j;
+	for (j = 0; j < size - 1; j++)
+		for (i = 0; i < size - 1; i++)
+			if (tab[i] < tab[i + 1])
+				swap(tab[0], tab[size - i - 1]);
+}
+void SmartArray::pytanie()
+{
+	int i;
+	int a = 0;
+	int b = 0;
+	for (i = 0; i < size - 1; i++)
+		if (tab[i] < tab[i + 1])
+			a += 1;
+	for (i = 0; i < size - 1; i++)
+		if (tab[i] < tab[i + 1])
+			b += 1;
+	if (a, b == size - 1)
+		cout << "tak\n";
+	else
+		cout << "nie\n";
+}
+int main()
+{
+
+	cout << "Wielkość tablicy: ";
+	int a, b;
+	cin >> a;
+	if (a <= 0)
+	{
+		cout << "blad";
+		return 0;
+	}
+	cout << endl;
+	SmartArray tablica(a);
+	do {
+		cout << "Opeacja:\n1-Max\n2-Min\n3-Sort\n4-Sprawdz sort\n5-mieszanie\n6-info/pokaz\n";
+		cin >> b;
+		switch (b)
+		{
+		case 1:
+		{
+			tablica.max();
+			system("PAUSE");
+			break;
+		}
+		case 2:
+		{
+			tablica.min();
+			system("PAUSE");
+			break;
+		}
+		case 3:
+		{
+			tablica.bubble_sort();
+			break;
+		}
+		case 4:
+		{
+			tablica.pytanie();
+			break;
+		}
+		case 5:
+		{
+			tablica.bubble_mieszanie();
+			break;
+		}
+		case 6:
+		{
+			tablica.show();
+			system("PAUSE");
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+
+	} while (true);
+}
